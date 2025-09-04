@@ -24,7 +24,8 @@ public class SubscriptionServiceImpl implements SubscriptionTypeService {
 
     @Override
     public SubscriptionType findById(Long id) {
-        return null;
+        Optional<SubscriptionType> optionalSubscriptionType = subscriptionTypeRepository.findById(id);
+        return optionalSubscriptionType.orElse(null);
     }
 
     @Override

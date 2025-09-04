@@ -23,4 +23,13 @@ public class SubscriptionTypeController {
         return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeService.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<SubscriptionType> findById(@PathVariable Long id) {
+        SubscriptionType subscriptionType = subscriptionTypeService.findById(id);
+        if (subscriptionType != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(subscriptionType);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 }
