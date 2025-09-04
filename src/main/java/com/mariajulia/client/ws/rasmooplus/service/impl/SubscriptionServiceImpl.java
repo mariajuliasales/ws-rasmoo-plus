@@ -1,5 +1,6 @@
 package com.mariajulia.client.ws.rasmooplus.service.impl;
 
+import com.mariajulia.client.ws.rasmooplus.exception.NotFoundException;
 import com.mariajulia.client.ws.rasmooplus.model.SubscriptionType;
 import com.mariajulia.client.ws.rasmooplus.repository.SubscriptionTypeRepository;
 import com.mariajulia.client.ws.rasmooplus.service.SubscriptionTypeService;
@@ -25,7 +26,10 @@ public class SubscriptionServiceImpl implements SubscriptionTypeService {
     @Override
     public SubscriptionType findById(Long id) {
         Optional<SubscriptionType> optionalSubscriptionType = subscriptionTypeRepository.findById(id);
-        return optionalSubscriptionType.orElse(null);
+        if (optionalSubscriptionType.isEmpty()) {
+            throw new NotFoundException("SubscriptionType não encontrado");
+        }
+        return optionalSubscriptionType.get();
     }
 
     @Override
@@ -40,6 +44,6 @@ public class SubscriptionServiceImpl implements SubscriptionTypeService {
 
     @Override
     public void deleteById(Long id) {
-
+        
     }
 }
