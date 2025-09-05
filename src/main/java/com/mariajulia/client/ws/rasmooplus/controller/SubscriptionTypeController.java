@@ -1,14 +1,12 @@
 package com.mariajulia.client.ws.rasmooplus.controller;
 
+import com.mariajulia.client.ws.rasmooplus.dto.request.SubscriptionTypeRequest;
 import com.mariajulia.client.ws.rasmooplus.dto.response.SubscriptionTypeResponse;
 import com.mariajulia.client.ws.rasmooplus.mapper.SubscriptionTypeMapper;
 import com.mariajulia.client.ws.rasmooplus.service.SubscriptionTypeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +32,13 @@ public class SubscriptionTypeController {
     public ResponseEntity<SubscriptionTypeResponse> findById(@PathVariable Long id) {
         SubscriptionTypeResponse subscriptionTypeResponse = SubscriptionTypeMapper.toSubscriptionTypeResponse(subscriptionTypeService.findById(id));
         return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeResponse);
+    }
+
+    @PostMapping
+    public ResponseEntity<SubscriptionTypeResponse> save(@RequestBody SubscriptionTypeRequest subscriptionTypeRequest) {
+        SubscriptionTypeResponse subscriptionTypeResponse = SubscriptionTypeMapper.toSubscriptionTypeResponse(
+                subscriptionTypeService.save(SubscriptionTypeMapper.toSubscriptionType(subscriptionTypeRequest))
+        );
+        return ResponseEntity.status(HttpStatus.CREATED).body(subscriptionTypeResponse);
     }
 }
