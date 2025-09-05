@@ -15,29 +15,30 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="user_payment_info")
+@Table(name = "user_payment_info")
 public class UserPaymentInfo implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_payment_info_id")
     private Long id;
 
-    @Column(name = "card_number")
+    @Column(name = "card_number", nullable = false, unique = true)
     private String cardNumber;
 
-    @Column(name = "card_expiration_month")
+    @Column(name = "card_expiration_month", nullable = false)
     private Long cardExpirationMonth;
 
-    @Column(name = "card_expiration_year")
+    @Column(name = "card_expiration_year", nullable = false)
     private Long cardExpirationYear;
 
-    @Column(name = "card_security_code")
+    @Column(name = "card_security_code", nullable = false)
     private String cardSecurityCode;
 
+    @Column(nullable = false)
     private BigDecimal price;
 
-    @Column(name = "dt_payment")
+    @Column(name = "dt_payment", nullable = false)
     private LocalDate dtPayment;
 
     @OneToOne
