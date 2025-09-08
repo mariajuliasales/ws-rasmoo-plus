@@ -3,6 +3,7 @@ package com.mariajulia.client.ws.rasmooplus.controller;
 import com.mariajulia.client.ws.rasmooplus.dto.request.SubscriptionTypeRequest;
 import com.mariajulia.client.ws.rasmooplus.dto.response.SubscriptionTypeResponse;
 import com.mariajulia.client.ws.rasmooplus.mapper.SubscriptionTypeMapper;
+import com.mariajulia.client.ws.rasmooplus.model.SubscriptionType;
 import com.mariajulia.client.ws.rasmooplus.service.SubscriptionTypeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,5 +41,15 @@ public class SubscriptionTypeController {
                 subscriptionTypeService.save(SubscriptionTypeMapper.toSubscriptionType(subscriptionTypeRequest))
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(subscriptionTypeResponse);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SubscriptionTypeResponse> update(@PathVariable Long id, @RequestBody SubscriptionTypeRequest subscriptionTypeRequest) {
+
+        SubscriptionType subscriptionType = SubscriptionTypeMapper.toSubscriptionType(subscriptionTypeRequest);
+
+        SubscriptionTypeResponse subscriptionTypeResponse = SubscriptionTypeMapper.toSubscriptionTypeResponse(subscriptionTypeService.update(id, subscriptionType));
+
+        return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeResponse);
     }
 }
