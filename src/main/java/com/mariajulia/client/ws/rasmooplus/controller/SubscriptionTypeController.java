@@ -5,6 +5,7 @@ import com.mariajulia.client.ws.rasmooplus.dto.response.SubscriptionTypeResponse
 import com.mariajulia.client.ws.rasmooplus.mapper.SubscriptionTypeMapper;
 import com.mariajulia.client.ws.rasmooplus.model.SubscriptionType;
 import com.mariajulia.client.ws.rasmooplus.service.SubscriptionTypeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class SubscriptionTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<SubscriptionTypeResponse> save(@RequestBody SubscriptionTypeRequest subscriptionTypeRequest) {
+    public ResponseEntity<SubscriptionTypeResponse> save(@Valid @RequestBody SubscriptionTypeRequest subscriptionTypeRequest) {
         SubscriptionTypeResponse subscriptionTypeResponse = SubscriptionTypeMapper.toSubscriptionTypeResponse(
                 subscriptionTypeService.save(SubscriptionTypeMapper.toSubscriptionType(subscriptionTypeRequest))
         );
@@ -44,7 +45,7 @@ public class SubscriptionTypeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SubscriptionTypeResponse> update(@PathVariable Long id, @RequestBody SubscriptionTypeRequest subscriptionTypeRequest) {
+    public ResponseEntity<SubscriptionTypeResponse> update(@PathVariable Long id, @Valid @RequestBody SubscriptionTypeRequest subscriptionTypeRequest) {
 
         SubscriptionType subscriptionType = SubscriptionTypeMapper.toSubscriptionType(subscriptionTypeRequest);
 
