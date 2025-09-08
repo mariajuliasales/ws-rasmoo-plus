@@ -17,7 +17,6 @@ public class ResourceHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse> notFoundException(NotFoundException n) {
-        String errorMessage = n.getMessage();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse.builder()
                 .message(n.getMessage())
                 .httpStatus(HttpStatus.NOT_FOUND)
