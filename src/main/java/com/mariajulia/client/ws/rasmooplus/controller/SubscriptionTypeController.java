@@ -52,4 +52,10 @@ public class SubscriptionTypeController {
 
         return ResponseEntity.status(HttpStatus.OK).body(subscriptionTypeResponse);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        subscriptionTypeService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
